@@ -22,4 +22,6 @@ public interface AuthService {
     void updateUserPassword(PasswordChangeRequest request) throws UserException;
 
     Token generatePasswordResetToken(String username) throws UserException;
+
+    UserDto updateUser(String userId, UserDto userDto) throws UserException;
 }

@@ -115,7 +115,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserDto findUserByUserName(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format("username already exits with %s", username)));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(String.format("No user found with user name " + username)));
         return mapper.map(user, UserDto.class);
     }
 
@@ -165,4 +165,14 @@ public class AuthServiceImpl implements AuthService {
         token.setExpiry(LocalDateTime.now().plusMinutes(30));
         return tokenRepository.save(token);
     }
+
+    @Override
+    public UserDto updateUser(String userId, UserDto userDto) throws UserException {
+            User userToUpdate = userRepository.findById(userId).orElseThrow(
+                    () -> new UserException(String.format("User with this id %s does not exist", userDto)));
+
+            mapper.map(userDto, userToUpdate);
+            User savedUser = userRepository.save(userToUpdate);
+            return mapper.map(savedUser, UserDto.class);
+        }
 }

@@ -3,6 +3,7 @@ package com.example.taskmanagement.services.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+@Slf4j
 @Component
 public class JwtTokenProvider {
     private final String SECRET_KEY = "923hihihqhuwih89hh23ih8923";
@@ -35,7 +37,7 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String jwt, UserDetails userDetails) {
         final String username = extractUsername(jwt);
-        return username.equals(userDetails.getUsername()) && isTokenExpired(jwt);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(jwt);
     }
 
     private boolean isTokenExpired(String jwt) {
