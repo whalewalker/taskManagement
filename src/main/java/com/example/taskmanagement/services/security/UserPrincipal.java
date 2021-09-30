@@ -1,6 +1,6 @@
 package com.example.taskmanagement.services.security;
 
-import com.example.taskmanagement.data.modal.User;
+import com.example.taskmanagement.data.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,8 +1,8 @@
 package com.example.taskmanagement.services;
 
 import com.example.taskmanagement.data.dto.TaskDto;
-import com.example.taskmanagement.data.modal.Task;
-import com.example.taskmanagement.data.modal.User;
+import com.example.taskmanagement.data.model.Task;
+import com.example.taskmanagement.data.model.User;
 import com.example.taskmanagement.data.repository.TaskRepository;
 import com.example.taskmanagement.data.repository.UserRepository;
 import com.example.taskmanagement.web.exceptions.TaskException;
@@ -12,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
+import static com.example.taskmanagement.data.model.TaskCategory.WORK;
+import static com.example.taskmanagement.data.model.TaskStatus.DOING;
 import static java.lang.String.format;
 
 @Slf4j
@@ -31,21 +34,20 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public TaskDto createTask(String userId, TaskDto taskDto) throws TaskException {
-        log.info("Checked");
         User user = userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException(format("No user found with user name %s", userId)));
 
-        Task task;
         if (taskRepository.existsByTitle(taskDto.getTitle())){
             throw new TaskException(format("Task already exists with %s", taskDto.getTitle()));
         }
-        if (taskDto.getDescription() == null){
-            task = new Task(taskDto.getTitle());
-        }else if (taskDto.getDescription() != null && taskDto.getStartTime() == null){
-            task = new Task(taskDto.getTitle(), taskDto.getDescription());
-        }else {
-            task = new Task(taskDto.getTitle(), taskDto.getDescription(), taskDto.getCreatedDate(),
-                    taskDto.getStartTime(), taskDto.getEndTime(), taskDto.getCategory());
-        }
+        Task task = mapper.map(taskDto, Task.class);
+
+        task.setCreatedDate(LocalDate.now());
+        task.setStartTime(LocalTime.now());
+        task.setEndTime(LocalTime.now().plusHours(24));
+         if (task.getCategory() == null || task.getTaskStatus() == null){
+             task.setCategory(WORK);
+             task.setTaskStatus(DOING);
+         }
         task.setUser(user);
         Task savedTask = taskRepository.save(task);
         return mapper.map(savedTask, TaskDto.class);
@@ -65,9 +67,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<TaskDto> getAllTask() {
-        List<Task> tasks = taskRepository.findAll();
-        return mapper.map(tasks, (Type) TaskDto.class);
+    public List<Task> getAllTask() {
+        return taskRepository.findAll();
     }
 
     @Override

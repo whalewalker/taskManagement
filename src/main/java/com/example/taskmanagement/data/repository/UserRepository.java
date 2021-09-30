@@ -1,6 +1,6 @@
 package com.example.taskmanagement.data.repository;
 
-import com.example.taskmanagement.data.modal.User;
+import com.example.taskmanagement.data.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

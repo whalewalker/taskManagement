@@ -1,6 +1,6 @@
 package com.example.taskmanagement.services.security;
 
-import com.example.taskmanagement.data.modal.User;
+import com.example.taskmanagement.data.model.User;
 import com.example.taskmanagement.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

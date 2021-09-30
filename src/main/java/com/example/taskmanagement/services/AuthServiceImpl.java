@@ -1,10 +1,10 @@
 package com.example.taskmanagement.services;
 
 import com.example.taskmanagement.data.dto.*;
-import com.example.taskmanagement.data.modal.Role;
-import com.example.taskmanagement.data.modal.Token;
-import com.example.taskmanagement.data.modal.TokenType;
-import com.example.taskmanagement.data.modal.User;
+import com.example.taskmanagement.data.model.Role;
+import com.example.taskmanagement.data.model.Token;
+import com.example.taskmanagement.data.model.TokenType;
+import com.example.taskmanagement.data.model.User;
 import com.example.taskmanagement.data.repository.TokenRepository;
 import com.example.taskmanagement.data.repository.UserRepository;
 import com.example.taskmanagement.services.security.CustomUserDetails;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static com.example.taskmanagement.data.modal.Role.*;
+import static com.example.taskmanagement.data.model.Role.*;
 
 @Service
 public class AuthServiceImpl implements AuthService {

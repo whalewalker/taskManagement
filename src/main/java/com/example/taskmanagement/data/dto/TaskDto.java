@@ -1,7 +1,7 @@
 package com.example.taskmanagement.data.dto;
 
 
-import com.example.taskmanagement.data.modal.TaskCategory;
+import com.example.taskmanagement.data.model.TaskCategory;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

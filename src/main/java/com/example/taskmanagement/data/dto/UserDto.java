@@ -1,6 +1,6 @@
 package com.example.taskmanagement.data.dto;
 
-import com.example.taskmanagement.data.modal.Role;
+import com.example.taskmanagement.data.model.Role;
 import lombok.Data;
 
 import java.util.Set;

@@ -2,7 +2,7 @@ package com.example.taskmanagement.services;
 
 
 import com.example.taskmanagement.data.dto.*;
-import com.example.taskmanagement.data.modal.Token;
+import com.example.taskmanagement.data.model.Token;
 import com.example.taskmanagement.web.exceptions.TokenException;
 import com.example.taskmanagement.web.exceptions.UserException;
 

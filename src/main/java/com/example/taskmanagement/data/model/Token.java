@@ -1,4 +1,4 @@
-package com.example.taskmanagement.data.modal;
+package com.example.taskmanagement.data.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
